@@ -1,17 +1,25 @@
 package lt.debarz.tacocloud.controllers;
 
-import static org.mockito.Mockito.verify;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import lt.debarz.tacocloud.entities.Ingredient;
 import lt.debarz.tacocloud.entities.Ingredient.Type;
 import lt.debarz.tacocloud.entities.Taco;
+import lt.debarz.tacocloud.repositories.IngredientRepository;
+import lt.debarz.tacocloud.repositories.OrderRepository;
+import lt.debarz.tacocloud.repositories.TacoRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -19,34 +27,26 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-//tag::testProcessForm[]
 @RunWith(SpringRunner.class)
 @WebMvcTest(DesignTacoController.class)
 public class DesignTacoControllerTest {
-
-    //end::testProcessForm[]
 
     @Autowired
     private MockMvc mockMvc;
 
     private List<Ingredient> ingredients;
 
-//end::testShowDesignForm[]
-
-  /*
-//tag::testProcessForm[]
-   ...
-//end::testProcessForm[]
- */
-
-    //tag::testProcessForm[]
     private Taco design;
 
-//end::testProcessForm[]
+    @MockBean
+    private IngredientRepository ingredientRepository;
 
-    //tag::testShowDesignForm[]
+    @MockBean
+    private TacoRepository designRepository;
+
+    @MockBean
+    private OrderRepository orderRepository;
+
     @Before
     public void setup() {
         ingredients = Arrays.asList(
@@ -62,12 +62,22 @@ public class DesignTacoControllerTest {
                 new Ingredient("SRCR", "Sour Cream", Type.SAUCE)
         );
 
-//end::testShowDesignForm[]
+        when(ingredientRepository.findAll())
+                .thenReturn(ingredients);
+
+        when(ingredientRepository.findById("FLTO")).thenReturn(new Ingredient("FLTO", "Flour Tortilla", Type.WRAP));
+        when(ingredientRepository.findById("GRBF")).thenReturn(new Ingredient("GRBF", "Ground Beef", Type.PROTEIN));
+        when(ingredientRepository.findById("CHED")).thenReturn(new Ingredient("CHED", "Cheddar", Type.CHEESE));
 
         design = new Taco();
         design.setName("Test Taco");
-        design.setIngredients(Arrays.asList("FLTO", "GRBF", "CHED"));
-//tag::testShowDesignForm[]
+
+        design.setIngredients(
+                Arrays.asList(
+                        new Ingredient("FLTO", "Flour Tortilla", Type.WRAP),
+                        new Ingredient("GRBF", "Ground Beef", Type.PROTEIN),
+                        new Ingredient("CHED", "Cheddar", Type.CHEESE)));
+
     }
 
     @Test
@@ -81,17 +91,12 @@ public class DesignTacoControllerTest {
                 .andExpect(model().attribute("cheese", ingredients.subList(6, 8)))
                 .andExpect(model().attribute("sauce", ingredients.subList(8, 10)));
     }
-//end::testShowDesignForm[]
 
-  /*
-//tag::testProcessForm[]
-   ...
-//end::testProcessForm[]
- */
-
-    //tag::testProcessForm[]
     @Test
     public void processDesign() throws Exception {
+        when(designRepository.save(design))
+                .thenReturn(design);
+
         mockMvc.perform(post("/design")
                 .content("name=Test+Taco&ingredients=FLTO,GRBF,CHED")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
@@ -99,5 +104,4 @@ public class DesignTacoControllerTest {
                 .andExpect(header().stringValues("Location", "/orders/current"));
     }
 
-//tag::testShowDesignForm[]
 }

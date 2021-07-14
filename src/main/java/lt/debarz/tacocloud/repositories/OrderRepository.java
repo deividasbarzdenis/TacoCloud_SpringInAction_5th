@@ -9,14 +9,14 @@ import java.util.List;
 
 public interface OrderRepository extends CrudRepository<Order, Long> {
 
-    List<Order> findByDeliveryZip(String deliveryZip);
+    List<Order> findByZip(String deliveryZip);
 
-    List<Order> readOrdersByDeliveryZipAndPlacedAtBetween(String deliveryZip, Date startDate, Date endDate);
+    List<Order> readOrdersByZipAndPlacedAtBetween(String deliveryZip, Date startDate, Date endDate);
 
-    List<Order> findByDeliveryToAndDeliveryCityAllIgnoresCase(String deliveryTo, String deliveryCity);
+//    List<Order> findByDeliveryToAndDeliveryCityAllIgnoresCase(String deliveryTo, String deliveryCity);
 
-    List<Order> findByDeliveryCityOrderByDeliveryTo(String city);
+    List<Order> findByCityOrderByName(String city);
 
-    @Query("Order o where o.deliveryCity='Vilnius'")
-    List<Order> readOrdersDeliveredInSeattle();
+    /*@Query("Order o where o.city='Vilnius'")
+    List<Order> readOrdersDeliveredToVilnius();*/
 }

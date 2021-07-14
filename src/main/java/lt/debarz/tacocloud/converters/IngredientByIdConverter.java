@@ -6,6 +6,8 @@ import org.springframework.core.convert.converter.Converter;
 import lt.debarz.tacocloud.entities.Ingredient;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class IngredientByIdConverter implements Converter<String, Ingredient>{
 
@@ -18,6 +20,8 @@ public class IngredientByIdConverter implements Converter<String, Ingredient>{
 
     @Override
     public Ingredient convert(String id) {
-        return ingredientRepo.findById(id);
+        Optional<Ingredient> optionalIngredient = ingredientRepo.findById(id);
+        return optionalIngredient.isPresent() ?
+                optionalIngredient.get() : null;
     }
 }

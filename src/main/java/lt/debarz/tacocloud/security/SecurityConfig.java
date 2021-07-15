@@ -13,5 +13,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception{
 
+        /*In-memory user store*/
+        auth
+                .inMemoryAuthentication()
+                .withUser("buzz")
+                .password("infinity")
+                .authorities("ROLE_USER")
+                .and()
+                .withUser("woody")
+                .password("bullseye")
+                .authorities("ROLE_USER");
+
     }
 }

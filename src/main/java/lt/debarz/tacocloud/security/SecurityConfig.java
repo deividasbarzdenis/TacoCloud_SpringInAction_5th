@@ -1,11 +1,14 @@
 package lt.debarz.tacocloud.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
 
 import javax.sql.DataSource;
@@ -17,10 +20,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     DataSource dataSource;
 
+    @Autowired
+    private UserDetailsService userDetailsService;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
-        /* 4. --- LDAP-backed user store --- */
+        /* 4. --- Customizing user authentication --- */
+        auth
+                .userDetailsService(userDetailsService)
+                .passwordEncoder(encoder());
 
         /* 3. --- LDAP-backed user store --- */
     /*    auth
@@ -57,5 +66,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorities("ROLE_USER");*/
 
 
+    }
+
+    @Bean
+    public PasswordEncoder encoder() {
+        return new StandardPasswordEncoder("53cr3t");
     }
 }

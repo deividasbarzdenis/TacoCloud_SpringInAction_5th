@@ -1,0 +1,17 @@
+#server:
+#  port: 8443
+#  sll:
+#    key-store: file:///path/to/mykeys.jks
+#    key-store-password: db1234
+#    key-password: db1234
+#logging:
+#  level:
+#    root: WARN
+#    org:
+#      springframework:
+#        security: DEBUG
+#  file:
+#    path: /var/logs/TacoCloud.log
+
+
+

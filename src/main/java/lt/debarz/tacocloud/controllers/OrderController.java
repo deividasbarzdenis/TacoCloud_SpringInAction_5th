@@ -5,6 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import lt.debarz.tacocloud.entities.Order;
 import lt.debarz.tacocloud.entities.User;
 import lt.debarz.tacocloud.repositories.OrderRepository;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +24,14 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/orders")
 @SessionAttributes("order")
+@ConfigurationProperties(prefix = "taco.orders")
 public class OrderController {
+
+    private int pageSize = 20;
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
 
     private OrderRepository orderRepo;
 
@@ -34,10 +44,11 @@ public class OrderController {
         model.addAttribute("order", new Order());
         return "orderForm";
     }
+
     @PostMapping
     public String processOrder(@Valid Order order, Errors errors,
                                SessionStatus sessionStatus, @AuthenticationPrincipal User user) {
-        if(errors.hasErrors()){
+        if (errors.hasErrors()) {
             return "orderForm";
         }
         order.setUser(user);
@@ -46,5 +57,15 @@ public class OrderController {
 
         log.info("Order submitted: " + order);
         return "redirect:/";
+    }
+
+    @GetMapping
+    public String ordersForUser(
+            @AuthenticationPrincipal User user, Model model) {
+        Pageable pageable = PageRequest.of(0, pageSize);
+        model.addAttribute("orders",
+                orderRepo.findByUserOrderByPlacedAtDesc(user, pageable));
+        return "orderList";
+
     }
 }

@@ -2,6 +2,7 @@ package lt.debarz.tacocloud.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 
@@ -12,6 +13,7 @@ import javax.validation.constraints.Min;
 @ConfigurationProperties(prefix="taco.orders")
 @Data
 @Validated
+@PropertySource("classpath:/application.yml")
 public class OrderProps {
 
     @Min(value=5, message="must be between 5 and 25")

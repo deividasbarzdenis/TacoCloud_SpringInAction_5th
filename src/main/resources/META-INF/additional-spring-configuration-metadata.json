@@ -6,6 +6,11 @@
       "description": "Sets the maximum number of orders to display in a list."
     },
     {
+      "name": "taco.discount.codes",
+      "type": "java.util.Map<String, Integer>",
+      "description": "A map of discount codes to a discount percentage."
+    },
+    {
       "name": "taco.discount.codes.abcdef",
       "type": "java.lang.String",
       "description": "Description for taco.discount.codes.abcdef."

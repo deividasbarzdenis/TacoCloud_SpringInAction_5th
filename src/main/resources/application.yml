@@ -1,8 +1,7 @@
-#spring:
-#  security:
-#    user:
-#      name: buzz
-#      password: infinity
+security:
+  user:
+    name: buzz
+    password: infinity
 
 taco:
   orders:
@@ -13,9 +12,18 @@ taco:
     codes:
       abcdef: 10
 
+#logging:
+#  level:
+#    org.springframework.data.rest: debug
+
+spring:
+  data:
+    rest:
+      base-path: /api
+
 ---
 spring:
-
+  profiles: prod
 
   datasource:
     url: jdbc:mysql://localhost/tacocloud

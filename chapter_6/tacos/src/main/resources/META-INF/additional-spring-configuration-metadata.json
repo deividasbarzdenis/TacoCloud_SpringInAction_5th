@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "taco.discount.codes.abcdef",
+      "type": "java.lang.String",
+      "description": "Description for taco.discount.codes.abcdef."
+    },
+    {
+      "name": "taco.orders.pageSize",
+      "type": "java.lang.String",
+      "description": "Description for taco.orders.pageSize."
+    }
+  ] }

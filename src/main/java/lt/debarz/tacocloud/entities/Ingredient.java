@@ -13,7 +13,7 @@ import javax.persistence.Id;
 
 @Data
 @RequiredArgsConstructor
-@NoArgsConstructor(access= AccessLevel.PROTECTED, force = true)
+@NoArgsConstructor(access= AccessLevel.PRIVATE, force = true)
 @Entity
 public class Ingredient {
     @Id
@@ -21,7 +21,7 @@ public class Ingredient {
     private  final String id;
     private  final String name;
 
-    @Enumerated(EnumType.STRING)
+//    @Enumerated(EnumType.STRING)
     private final Type type;
 
     public static enum Type {

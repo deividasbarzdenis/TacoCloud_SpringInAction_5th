@@ -1,10 +1,10 @@
 package lt.debarz.tacocloud.controllers;
 
-import lombok.extern.slf4j.Slf4j;
 import lt.debarz.tacocloud.config.OrderProps;
 import lt.debarz.tacocloud.entities.Order;
 import lt.debarz.tacocloud.entities.User;
 import lt.debarz.tacocloud.repositories.OrderRepository;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -16,18 +16,18 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import javax.validation.Valid;
 
-@Slf4j
 @Controller
 @RequestMapping("/orders")
 @SessionAttributes("order")
 public class OrderController {
 
-    private OrderProps props;
-    private OrderRepository orderRepo;
 
-    public OrderController(OrderProps props, OrderRepository orderRepo) {
-        this.props = props;
+    private OrderRepository orderRepo;
+    private OrderProps props;
+
+    public OrderController(OrderRepository orderRepo, @Qualifier("taco.orders-lt.debarz.tacocloud.config.OrderProps") OrderProps props) {
         this.orderRepo = orderRepo;
+        this.props = props;
     }
 
     @GetMapping("/current")
@@ -60,8 +60,6 @@ public class OrderController {
         order.setUser(user);
         orderRepo.save(order);
         sessionStatus.setComplete();
-
-        log.info("Order submitted: " + order);
         return "redirect:/";
     }
 

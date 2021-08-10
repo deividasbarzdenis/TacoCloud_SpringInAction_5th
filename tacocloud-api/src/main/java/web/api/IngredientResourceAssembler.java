@@ -3,8 +3,7 @@ package web.api;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import tacos.Ingredient;
 
-class IngredientResourceAssembler extends 
-          ResourceAssemblerSupport<Ingredient, IngredientResource> {
+class IngredientResourceAssembler extends ResourceAssemblerSupport<Ingredient, IngredientResource> {
 
   public IngredientResourceAssembler() {
     super(IngredientController.class, IngredientResource.class);
@@ -16,8 +15,7 @@ class IngredientResourceAssembler extends
   }
   
   @Override
-  protected IngredientResource instantiateResource(
-                                            Ingredient ingredient) {
+  protected IngredientResource instantiateResource(Ingredient ingredient) {
     return new IngredientResource(ingredient);
   }
 

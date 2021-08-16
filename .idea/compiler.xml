@@ -7,13 +7,17 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="tacocloud-kitchen" />
         <module name="tacocloud-security" />
         <module name="tacocloud-restclient" />
         <module name="tacocloud-api" />
+        <module name="tacocloud-messaging-jms" />
         <module name="tacocloud-domain" />
         <module name="tacos" />
         <module name="tacocloud-data" />
+        <module name="tacocloud-messaging-kafka" />
         <module name="tacocloud-web" />
+        <module name="tacocloud-messaging-rabbitmq" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -26,6 +30,10 @@
       <module name="tacocloud-data (1) (sia)" target="14" />
       <module name="tacocloud-domain" target="8" />
       <module name="tacocloud-domain (1) (sia)" target="14" />
+      <module name="tacocloud-kitchen" target="8" />
+      <module name="tacocloud-messaging-jms" target="8" />
+      <module name="tacocloud-messaging-kafka" target="8" />
+      <module name="tacocloud-messaging-rabbitmq" target="8" />
       <module name="tacocloud-restclient" target="8" />
       <module name="tacocloud-security" target="8" />
       <module name="tacocloud-security (1) (sia)" target="14" />
@@ -42,6 +50,10 @@
       <module name="tacocloud-data" options="-parameters" />
       <module name="tacocloud-domain" options="-parameters" />
       <module name="tacocloud-domain (1) (sia)" options="-parameters" />
+      <module name="tacocloud-kitchen" options="-parameters" />
+      <module name="tacocloud-messaging-jms" options="-parameters" />
+      <module name="tacocloud-messaging-kafka" options="-parameters" />
+      <module name="tacocloud-messaging-rabbitmq" options="-parameters" />
       <module name="tacocloud-restclient" options="-parameters" />
       <module name="tacocloud-security" options="-parameters" />
       <module name="tacocloud-ui" options="-parameters" />

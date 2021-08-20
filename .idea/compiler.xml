@@ -18,6 +18,7 @@
         <module name="tacocloud-messaging-kafka" />
         <module name="tacocloud-web" />
         <module name="tacocloud-messaging-rabbitmq" />
+        <module name="tacocloud-email" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -30,6 +31,7 @@
       <module name="tacocloud-data (1) (sia)" target="14" />
       <module name="tacocloud-domain" target="8" />
       <module name="tacocloud-domain (1) (sia)" target="14" />
+      <module name="tacocloud-email" target="8" />
       <module name="tacocloud-kitchen" target="8" />
       <module name="tacocloud-messaging-jms" target="8" />
       <module name="tacocloud-messaging-kafka" target="8" />
@@ -50,6 +52,7 @@
       <module name="tacocloud-data" options="-parameters" />
       <module name="tacocloud-domain" options="-parameters" />
       <module name="tacocloud-domain (1) (sia)" options="-parameters" />
+      <module name="tacocloud-email" options="-parameters" />
       <module name="tacocloud-kitchen" options="-parameters" />
       <module name="tacocloud-messaging-jms" options="-parameters" />
       <module name="tacocloud-messaging-kafka" options="-parameters" />

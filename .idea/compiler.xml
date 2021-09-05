@@ -7,21 +7,23 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="tacocloud-kitchen" />
-        <module name="tacocloud-security" />
         <module name="tacocloud-restclient" />
-        <module name="tacocloud-api" />
         <module name="tacocloud-messaging-jms" />
         <module name="tacocloud-domain" />
         <module name="tacos" />
         <module name="tacocloud-data" />
+        <module name="tacocloud-email" />
+        <module name="tacocloud-kitchen" />
+        <module name="tacocloud-security" />
+        <module name="tacocloud-api" />
+        <module name="reactor-fun" />
         <module name="tacocloud-messaging-kafka" />
         <module name="tacocloud-web" />
         <module name="tacocloud-messaging-rabbitmq" />
-        <module name="tacocloud-email" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="reactor-fun" target="1.8" />
       <module name="taco-cloud" target="1.8" />
       <module name="taco-cloud (1) (sia)" target="14" />
       <module name="taco-cloud-parent" target="14" />
@@ -47,6 +49,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="reactor-fun" options="-parameters" />
       <module name="taco-cloud" options="-parameters" />
       <module name="tacocloud-api" options="-parameters" />
       <module name="tacocloud-data" options="-parameters" />

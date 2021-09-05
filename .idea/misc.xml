@@ -5,6 +5,7 @@
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/chapter_6/pom.xml" />
+        <option value="$PROJECT_DIR$/reactor-fun/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
